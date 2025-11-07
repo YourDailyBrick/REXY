@@ -6,6 +6,7 @@
     <title>REXY | Dark Theme Landing Page</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="projects.css">
 </head>
 <body>
 
@@ -32,15 +33,15 @@
             <h2>Featured Projects</h2>
             <div class="project-grid">
                 <a href="project-detail.html?project=ghost" class="project-card-preview">
-                    <img src="https://i.imgur.com/uNf7q0B.jpeg" alt="Ghost Project Cover">
+                    <img src="https://i.imgur.com/ZzslaWs.jpeg" alt="Ghost Project Cover">
                     <h3>Ghost</h3>
                 </a>
                 <a href="project-detail.html?project=panel" class="project-card-preview">
-                    <img src="https://i.imgur.com/8Q9t7wP.jpeg" alt="Panel Project Cover">
+                    <img src="https://i.imgur.com/Tc56z02.jpeg" alt="Panel Project Cover">
                     <h3>Panel</h3>
                 </a>
                 <a href="project-detail.html?project=nukeslime" class="project-card-preview">
-                    <img src="https://i.imgur.com/82Q2UfG.jpeg" alt="Nuke Slime Project Cover">
+                    <img src="https://i.imgur.com/xhj65YD.jpeg" alt="Nuke Slime Project Cover">
                     <h3>Nuke Slime</h3>
                 </a>
             </div>
@@ -100,7 +101,6 @@
         // --- Utility Functions ---
         function setCurrentYear() {
             const currentYear = new Date().getFullYear();
-            // Note: I've updated the IDs to reflect the new structure
             document.getElementById('current-year-home').textContent = currentYear;
             document.getElementById('current-year-links').textContent = currentYear;
         }
