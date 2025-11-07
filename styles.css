@@ -1,12 +1,13 @@
 /* --- Color Palette --- */
 :root {
-    --color-black: #0a0a0a;           /* Deepest Black for background */
-    --color-dark-gray: #1e1e1e;       /* Dark Gray for containers */
-    --color-dark-blue: #1e2a38;       /* Dark Navy Blue for accents/footer */
-    --color-text-light: #f0f0f0;      /* Near White for main text (Used for logo now) */
-    --color-accent: #00bcd4;          /* Bright Cyan/Blue (Used for button and hover) */
-    --color-text-header: #4a8993;     /* Subtler, darker blue for header text/glow */
-    --color-accent-dark: #0097a7;     /* Darker accent for hover */
+    /* Richer Blue Palette */
+    --color-black: #0a0a0a;             /* Deepest Black for background */
+    --color-dark-gray: #1e1e1e;         /* Dark Gray for containers */
+    --color-dark-blue: #141c2c;         /* Dark Navy Blue for accents/footer - DEEPER */
+    --color-text-light: #f0f0f0;        /* Near White for main text */
+    --color-accent: #3a7bd5;            /* BRIGHTER, RICHER Blue for links/highlights */
+    --color-text-header: #5f86b7;       /* Subtler Blue for header text/glow - MATCHES NEW ACCENT */
+    --color-accent-dark: #1e5799;       /* Darker accent for hover/buttons - DARKER BLUE */
 }
 
 /* Basic Reset and Global Styles */
@@ -32,41 +33,57 @@ body {
     overflow: hidden;
 }
 
-/* --- Navigation Bar Styling --- */
-#navbar {
+/* --- Navigation Bar Styling (Main & Overlay) --- */
+/* The main navbar styling applies to the new .overlay-navbar too for consistency */
+#navbar,
+.overlay-navbar {
     background-color: var(--color-dark-gray); 
     padding: 20px 0; 
-    position: absolute;
     width: 100%;
-    top: 0;
     z-index: 10; 
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); 
 }
 
-#navbar .container {
+/* Main Navbar is positioned absolutely */
+#navbar {
+    position: absolute;
+    top: 0;
+}
+
+/* Overlay Navbar is positioned absolutely within the overlay */
+.overlay-navbar {
+    position: absolute;
+    top: 0;
+}
+
+#navbar .container,
+.overlay-navbar .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-#navbar .logo {
-    /* UPDATED: Larger font and changed color to match general text */
-    font-size: 1.8em; /* Increased size */
+#navbar .logo,
+.overlay-navbar .logo {
+    font-size: 1.8em; 
     font-weight: 700;
     letter-spacing: 1px;
-    color: var(--color-text-light); /* Changed from accent to light text color */
+    color: var(--color-text-light); 
 }
 
-#navbar ul {
+#navbar ul,
+.overlay-navbar ul {
     list-style: none;
     display: flex;
 }
 
-#navbar ul li {
+#navbar ul li,
+.overlay-navbar ul li {
     margin-left: 30px; 
 }
 
-#navbar ul li a {
+#navbar ul li a,
+.overlay-navbar ul li a {
     color: var(--color-text-light);
     text-decoration: none;
     font-weight: 400;
@@ -76,7 +93,9 @@ body {
 }
 
 #navbar ul li a:hover,
-#navbar ul li a.active {
+#navbar ul li a.active,
+.overlay-navbar ul li a:hover,
+.overlay-navbar ul li a.active {
     opacity: 1;
     color: var(--color-accent); 
     border-bottom: 2px solid var(--color-accent);
@@ -85,7 +104,6 @@ body {
 
 /* --- Main Landing Section (Header) --- */
 .main-header {
-    /* Subtle Dark Gradient for the hero section */
     background: linear-gradient(145deg, var(--color-black) 0%, var(--color-dark-gray) 100%);
     height: 100vh;
     display: flex;
@@ -95,7 +113,6 @@ body {
 }
 
 .header-content {
-    /* Use Dark Blue for the content block for contrast and depth */
     background: var(--color-dark-blue);
     padding: 40px 60px;
     border-radius: 10px;
@@ -112,9 +129,9 @@ body {
     letter-spacing: -2px;
     text-transform: uppercase;
     
-    /* Subtle Dark Glow Effect */
+    /* Updated glow color for the richer blue */
     color: var(--color-text-header); 
-    text-shadow: 0 0 5px rgba(74, 137, 147, 0.5); 
+    text-shadow: 0 0 5px rgba(95, 134, 183, 0.5); 
 }
 
 .header-content p {
@@ -134,12 +151,18 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    /* Same background as the main page */
+    /* Subtle Dark Gradient for the overlay */
     background: linear-gradient(145deg, var(--color-black) 0%, var(--color-dark-gray) 100%);
     z-index: 100; 
     align-items: center;
     justify-content: center;
     text-align: center;
+}
+
+/* We need to push the content down slightly to account for the overlay-navbar */
+.overlay-content {
+    /* This centers the content vertically below the top nav bar */
+    padding-top: 100px; /* Adjust based on your navbar height */
 }
 
 .overlay-content h2 {
@@ -154,34 +177,20 @@ body {
     letter-spacing: 10px;
     margin-bottom: 30px;
     
-    /* Subtle Dark Glow Effect */
+    /* Updated glow color for the richer blue */
     color: var(--color-text-header);
-    text-shadow: 0 0 8px rgba(74, 137, 147, 0.6); 
+    text-shadow: 0 0 8px rgba(95, 134, 183, 0.6); 
 }
 
-.close-overlay {
-    position: absolute;
-    top: 30px;
-    right: 40px;
-    font-size: 50px;
-    color: var(--color-accent);
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    opacity: 0.9;
-    transition: color 0.2s;
-}
+/* Removed .close-overlay styling as the button is removed from HTML */
 
-.close-overlay:hover {
-    color: var(--color-text-light);
-}
 
 /* --- Styling for the Discord Button on the Links Page --- */
 .btn-discord {
     display: inline-block;
-    /* UPDATED: Background color changed to match accent color */
-    background-color: var(--color-accent); 
-    color: var(--color-dark-blue); /* Dark text on the bright button */
+    /* NEW: Using the darker accent color for the button */
+    background-color: var(--color-accent-dark); 
+    color: var(--color-text-light); /* Light text on the dark button */
     padding: 15px 30px;
     margin: 20px 0;
     text-decoration: none;
@@ -189,17 +198,18 @@ body {
     font-size: 1.2em;
     font-weight: 700;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 5px 15px rgba(0, 188, 212, 0.3); /* Soft glow shadow */
+    /* Updated shadow color to match the new darker accent */
+    box-shadow: 0 5px 15px rgba(30, 87, 153, 0.5); 
 }
 
 .btn-discord:hover {
-    background-color: var(--color-accent-dark); 
+    /* Use a slightly lighter blue on hover for lift */
+    background-color: var(--color-accent); 
     transform: translateY(-2px);
 }
 
 /* --- Footer Styling --- */
 #footer {
-    /* Use the Dark Navy Blue for the footer */
     background-color: var(--color-dark-blue);
     color: var(--color-text-light);
     padding: 30px 0;
@@ -235,14 +245,17 @@ body {
 
 /* --- Media Queries (Responsiveness) --- */
 @media (max-width: 768px) {
-    #navbar .container {
+    #navbar .container,
+    .overlay-navbar .container {
         flex-direction: column;
         text-align: center;
     }
-    #navbar ul {
+    #navbar ul,
+    .overlay-navbar ul {
         margin-top: 15px;
     }
-    #navbar ul li {
+    #navbar ul li,
+    .overlay-navbar ul li {
         margin: 0 15px;
     }
     .header-content h1 {
