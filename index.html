@@ -96,7 +96,7 @@
 
 
     <script>
-        // Select all necessary elements
+        // --- Element Selection ---
         const projectsLink = document.getElementById('projects-link');
         const linksLink = document.getElementById('links-link');
         const footerProjectsLink = document.getElementById('footer-projects-link');
@@ -111,7 +111,8 @@
         const overlayProjectsToLinks = document.getElementById('overlay-projects-to-links');
         const overlayLinksToProjects = document.getElementById('overlay-links-to-projects');
         
-        // --- Utility Code: Setting Year ---
+        // --- Utility Functions ---
+        
         // Helper to set the year for all footers
         function setCurrentYear() {
             const currentYear = new Date().getFullYear();
@@ -120,16 +121,33 @@
             document.getElementById('current-year-links').textContent = currentYear;
         }
 
-        // Function to open an overlay
-        function openOverlay(overlayElement) {
-            document.body.style.overflow = 'hidden'; // Hide body scrollbar when overlay is open
-            overlayElement.style.display = 'flex';
-        }
-
         // Function to close an overlay (by navigating to the #home section)
         function closeOverlay(overlayElement) {
             overlayElement.style.display = 'none';
             document.body.style.overflow = 'auto'; // Restore scrollbar
+        }
+        
+        // Function to open an overlay
+        function openOverlay(overlayElement) {
+            // First, ensure any other overlay is closed (in case of fast clicks)
+            if (overlayElement === projectsOverlay) {
+                closeOverlay(linksOverlay);
+            } else if (overlayElement === linksOverlay) {
+                closeOverlay(projectsOverlay);
+            }
+            
+            document.body.style.overflow = 'hidden'; // Hide body scrollbar when overlay is open
+            overlayElement.style.display = 'flex';
+        }
+        
+        // NEW: Function to ensure the main page is visible on load
+        function initializeSiteState() {
+            closeOverlay(projectsOverlay);
+            closeOverlay(linksOverlay);
+            setCurrentYear(); // Set copyright years
+            
+            // Explicitly set body overflow to auto on load (important for initial state)
+            document.body.style.overflow = 'auto';
         }
 
         // --- Event Listeners for Opening Overlays (Header & Footer links) ---
@@ -147,7 +165,7 @@
         closeHomeLinks.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
-                // Check which overlay is currently visible/ancestor of the link
+                // Find which overlay to close
                 const parentOverlay = link.closest('.overlay');
                 if (parentOverlay) {
                     closeOverlay(parentOverlay);
@@ -159,6 +177,7 @@
         [projectsToLinks, overlayProjectsToLinks].forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
+                // Close Projects, Open Links
                 closeOverlay(projectsOverlay);
                 openOverlay(linksOverlay);
             });
@@ -168,13 +187,15 @@
         [linksToProjects, overlayLinksToProjects].forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
+                // Close Links, Open Projects
                 closeOverlay(linksOverlay);
                 openOverlay(projectsOverlay);
             });
         });
         
-        // Run the year function
-        setCurrentYear();
+        // --- Initialization ---
+        window.addEventListener('load', initializeSiteState);
+        
     </script>
 
 </body>
