@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REXY | Projects</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="projects.css">
+</head>
+<body>
+
+    <nav id="navbar">
+        <div class="container">
+            <h1 class="logo">REXY</h1>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html" class="active">Projects</a></li>
+                <li><a href="#" id="links-link">Links</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <section id="all-projects" class="page-content">
+        <div class="container">
+            <h1>All Projects</h1>
+            <p class="subtitle">A showcase of my latest development work.</p>
+            
+            <div class="project-grid large-grid">
+                
+                <a href="project-detail.html?project=ghost" class="project-card">
+                    <img src="https://i.imgur.com/uNf7q0B.jpeg" alt="Ghost Project Cover">
+                    <div class="card-info">
+                        <h3>Ghost</h3>
+                        <p>View Details &rarr;</p>
+                    </div>
+                </a>
+
+                <a href="project-detail.html?project=panel" class="project-card">
+                    <img src="https://i.imgur.com/8Q9t7wP.jpeg" alt="Panel Project Cover">
+                    <div class="card-info">
+                        <h3>Panel</h3>
+                        <p>View Details &rarr;</p>
+                    </div>
+                </a>
+
+                <a href="project-detail.html?project=nukeslime" class="project-card">
+                    <img src="https://i.imgur.com/82Q2UfG.jpeg" alt="Nuke Slime Project Cover">
+                    <div class="card-info">
+                        <h3>Nuke Slime</h3>
+                        <p>View Details &rarr;</p>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <footer id="footer">
+        <div class="container">
+            <p class="copyright">&copy; <span id="current-year"></span> REXY. All rights reserved.</p>
+            <div class="footer-nav">
+                <a href="index.html">Home</a>
+                <a href="projects.html" class="active">Projects</a>
+                <a href="#" id="footer-links-link">Links</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simplified script for Projects page
+        const linksLink = document.getElementById('links-link');
+        const footerLinksLink = document.getElementById('footer-links-link');
+        
+        // Functionality for the "Links" overlay button if it's reused across pages (requires a hidden overlay div in this file)
+        // For simplicity, we assume links will open the overlay (which must be copied here) or direct to a links page.
+        // For now, these links will point back to index.html and trigger the overlay from there.
+        linksLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.location.href = 'index.html#links';
+        });
+
+        footerLinksLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.location.href = 'index.html#links';
+        });
+
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+
+</body>
+</html>
