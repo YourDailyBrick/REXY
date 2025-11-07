@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REXY | Project Detail</title> 
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="projects.css">
+</head>
+<body>
+
+    <nav id="navbar">
+        <div class="container">
+            <h1 class="logo">REXY</h1>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="#" id="links-link">Links</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <section id="project-detail" class="page-content">
+        <div class="container">
+            <h1 id="project-title">Loading...</h1>
+            <div class="detail-container">
+                <img id="project-image" src="" alt="Project Image Cover" class="detail-image">
+                <p id="project-description" class="detail-text">Loading Description...</p>
+            </div>
+            <a href="projects.html" class="btn-secondary">&larr; Back to All Projects</a>
+        </div>
+    </section>
+
+    <footer id="footer">
+        <div class="container">
+            <p class="copyright">&copy; <span id="current-year"></span> REXY. All rights reserved.</p>
+            <div class="footer-nav">
+                <a href="index.html">Home</a>
+                <a href="projects.html">Projects</a>
+                <a href="#" id="footer-links-link">Links</a>
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+        // Project Data Lookup
+        const PROJECTS_DATA = {
+            'ghost': {
+                title: 'Ghost',
+                image: 'https://i.imgur.com/uNf7q0B.jpeg',
+                description: 'It is a test description for the Ghost project. This is a placeholder for a detailed overview.'
+            },
+            'panel': {
+                title: 'Panel',
+                image: 'https://i.imgur.com/8Q9t7wP.jpeg',
+                description: 'It is a test description for the Panel project. This is a placeholder for a detailed overview.'
+            },
+            'nukeslime': {
+                title: 'Nuke Slime',
+                image: 'https://i.imgur.com/82Q2UfG.jpeg',
+                description: 'It is a test description for the Nuke Slime project. This is a placeholder for a detailed overview.'
+            }
+        };
+
+        function loadProjectDetail() {
+            // 1. Get the project ID from the URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const projectId = urlParams.get('project');
+
+            // 2. Look up the data
+            const project = PROJECTS_DATA[projectId];
+
+            // 3. Populate the page elements
+            if (project) {
+                document.title = `REXY | ${project.title}`;
+                document.getElementById('project-title').textContent = project.title;
+                document.getElementById('project-image').src = project.image;
+                document.getElementById('project-description').textContent = project.description;
+            } else {
+                // Fallback if the project is not found
+                document.getElementById('project-title').textContent = 'Project Not Found';
+                document.getElementById('project-description').textContent = 'The requested project could not be loaded.';
+            }
+            
+            // Set the current year
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+        }
+
+        // Run on page load
+        window.addEventListener('load', loadProjectDetail);
+    </script>
+
+</body>
+</html>
