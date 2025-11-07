@@ -52,8 +52,11 @@ body {
 
 /* Overlay Navbar is positioned absolutely within the overlay */
 .overlay-navbar {
-    position: absolute;
+    /* Need to set position relative to parent to stick to top of overlay */
+    position: sticky; 
     top: 0;
+    /* Ensure it overlays content as the user scrolls */
+    z-index: 99; 
 }
 
 #navbar .container,
@@ -129,7 +132,6 @@ body {
     letter-spacing: -2px;
     text-transform: uppercase;
     
-    /* Updated glow color for the richer blue */
     color: var(--color-text-header); 
     text-shadow: 0 0 5px rgba(95, 134, 183, 0.5); 
 }
@@ -151,18 +153,27 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    /* Subtle Dark Gradient for the overlay */
     background: linear-gradient(145deg, var(--color-black) 0%, var(--color-dark-gray) 100%);
     z-index: 100; 
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+    
+    /* NEW: Flexbox setup for full-height content/footer */
+    display: flex;
+    flex-direction: column;
+    /* This allows the main content to grow and push the footer down */
+    justify-content: flex-start; 
+    overflow-y: auto; /* Allow scrolling within the overlay if content is long */
 }
 
-/* We need to push the content down slightly to account for the overlay-navbar */
+/* This is the main content block within the overlay */
 .overlay-content {
-    /* This centers the content vertically below the top nav bar */
-    padding-top: 100px; /* Adjust based on your navbar height */
+    /* NEW: Takes up all available space, pushing the footer down */
+    flex-grow: 1; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Center the content vertically within its own block */
+    padding: 100px 20px; /* Top padding for the navbar and general padding */
+    text-align: center;
 }
 
 .overlay-content h2 {
@@ -177,20 +188,15 @@ body {
     letter-spacing: 10px;
     margin-bottom: 30px;
     
-    /* Updated glow color for the richer blue */
     color: var(--color-text-header);
     text-shadow: 0 0 8px rgba(95, 134, 183, 0.6); 
 }
 
-/* Removed .close-overlay styling as the button is removed from HTML */
-
-
 /* --- Styling for the Discord Button on the Links Page --- */
 .btn-discord {
     display: inline-block;
-    /* NEW: Using the darker accent color for the button */
     background-color: var(--color-accent-dark); 
-    color: var(--color-text-light); /* Light text on the dark button */
+    color: var(--color-text-light); 
     padding: 15px 30px;
     margin: 20px 0;
     text-decoration: none;
@@ -198,26 +204,28 @@ body {
     font-size: 1.2em;
     font-weight: 700;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    /* Updated shadow color to match the new darker accent */
     box-shadow: 0 5px 15px rgba(30, 87, 153, 0.5); 
 }
 
 .btn-discord:hover {
-    /* Use a slightly lighter blue on hover for lift */
     background-color: var(--color-accent); 
     transform: translateY(-2px);
 }
 
-/* --- Footer Styling --- */
-#footer {
+/* --- Footer Styling (Main & Overlay) --- */
+#footer,
+.overlay-footer {
     background-color: var(--color-dark-blue);
     color: var(--color-text-light);
     padding: 30px 0;
     border-top: 2px solid var(--color-dark-gray);
     font-size: 0.9em;
+    width: 100%; /* Ensure both footers span full width */
+    flex-shrink: 0; /* Ensures the overlay footer doesn't shrink */
 }
 
-#footer .container {
+#footer .container,
+.overlay-footer .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -235,6 +243,10 @@ body {
     margin-left: 25px;
     opacity: 0.8;
     transition: opacity 0.3s;
+}
+
+.footer-nav a.active {
+    color: var(--color-text-light);
 }
 
 .footer-nav a:hover {
@@ -269,7 +281,8 @@ body {
         font-size: 3em;
         letter-spacing: 5px;
     }
-    #footer .container {
+    #footer .container,
+    .overlay-footer .container {
         flex-direction: column;
         text-align: center;
     }
@@ -279,5 +292,8 @@ body {
     .footer-nav a {
         display: block;
         margin: 5px 0;
+    }
+    .overlay-content {
+        padding-top: 150px; /* Adjust top padding for smaller screens where the nav is taller */
     }
 }
